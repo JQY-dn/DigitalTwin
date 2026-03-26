@@ -1,0 +1,320 @@
+﻿<Window x:Class="DigitalTwin.Shell.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:local="clr-namespace:DigitalTwin.Shell.Controls"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:conv="clr-namespace:DigitalTwin.Shell.Converters"
+        Title="AS/RS Digital Twin"
+        WindowStyle="None"
+        AllowsTransparency="False"
+        ResizeMode="CanResizeWithGrip"
+        Width="1600" Height="900"
+        MinWidth="1280" MinHeight="720"
+        Background="{StaticResource Bg0Brush}">
+
+    <Window.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolVis"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="705*"/>
+            <ColumnDefinition Width="706*"/>
+            <ColumnDefinition Width="172*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="26"/>
+        </Grid.RowDefinitions>
+
+        <!-- ╔══════════════════════════════════════════╗
+             ║  ROW 0 · TITLE BAR                       ║
+             ╚══════════════════════════════════════════╝ -->
+        <!--MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"-->
+        <Border Grid.Row="0"
+                Background="{StaticResource Bg1Brush}"
+                BorderBrush="{StaticResource LineBrush}"
+                BorderThickness="0,0,0,1" Grid.ColumnSpan="4"
+                >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Logo -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Nav Tabs -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Right -->
+                </Grid.ColumnDefinitions>
+
+                <!-- ── Logo ── -->
+                <StackPanel Grid.Column="0"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="16,0,24,0">
+                    <Viewbox Width="26" Height="26" Margin="0,0,10,0">
+                        <Canvas Width="28" Height="28">
+                            <Rectangle Canvas.Left="2"  Canvas.Top="8"
+                                       Width="24" Height="16" RadiusX="1" RadiusY="1"
+                                       Stroke="{StaticResource CyanBrush}" StrokeThickness="1.2"
+                                       Fill="Transparent"/>
+                            <!-- 货架格子 -->
+                            <Rectangle Canvas.Left="6"  Canvas.Top="12" Width="4" Height="4"
+                                       Fill="#4D00D8FF" Stroke="#9900D8FF" StrokeThickness="0.8" RadiusX="0.5" RadiusY="0.5"/>
+                            <Rectangle Canvas.Left="12" Canvas.Top="12" Width="4" Height="4"
+                                       Fill="#8000D8FF" Stroke="#CC00D8FF" StrokeThickness="0.8" RadiusX="0.5" RadiusY="0.5"/>
+                            <Rectangle Canvas.Left="18" Canvas.Top="12" Width="4" Height="4"
+                                       Fill="#3300D8FF" Stroke="#6600D8FF" StrokeThickness="0.8" RadiusX="0.5" RadiusY="0.5"/>
+                            <Rectangle Canvas.Left="6"  Canvas.Top="18" Width="4" Height="4"
+                                       Fill="#6600D8FF" Stroke="#9900D8FF" StrokeThickness="0.8" RadiusX="0.5" RadiusY="0.5"/>
+                            <Rectangle Canvas.Left="12" Canvas.Top="18" Width="4" Height="4"
+                                       Fill="#2600D8FF" Stroke="#4D00D8FF" StrokeThickness="0.8" RadiusX="0.5" RadiusY="0.5"/>
+                            <Rectangle Canvas.Left="18" Canvas.Top="18" Width="4" Height="4"
+                                       Fill="#7300D8FF" Stroke="#B300D8FF" StrokeThickness="0.8" RadiusX="0.5" RadiusY="0.5"/>
+                            <!-- 屋顶 -->
+                            <Line X1="14" Y1="2" X2="14" Y2="8"
+                                  Stroke="{StaticResource CyanBrush}" StrokeThickness="1.2"/>
+                            <Line X1="10" Y1="5" X2="14" Y2="2"
+                                  Stroke="{StaticResource CyanBrush}" StrokeThickness="1.2"/>
+                            <Line X1="18" Y1="5" X2="14" Y2="2"
+                                  Stroke="{StaticResource CyanBrush}" StrokeThickness="1.2"/>
+                        </Canvas>
+                    </Viewbox>
+                    <TextBlock VerticalAlignment="Center"
+                               FontFamily="{StaticResource DisplayFont}"
+                               FontSize="18" FontWeight="Bold"
+                               >
+                        <Run Foreground="{StaticResource Txt0Brush}">AS/RS </Run>
+                        <Run Foreground="{StaticResource CyanBrush}">TWIN</Run>
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- ── Nav Tabs → NavTabsRegion ── -->
+                <ContentControl
+                                prism:RegionManager.RegionName="NavTabsRegion"
+                                Focusable="False" Grid.ColumnSpan="2" Margin="182,0,0,0" HorizontalAlignment="Left" Width="1324"/>
+
+                <!-- ── 右侧：连接状态 + 时钟 + 窗口按钮 ── -->
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="0,0,14,0">
+
+                    <!-- 连接状态区域 -->
+                    <ContentControl prism:RegionManager.RegionName="ConnStatusRegion"
+                                    VerticalAlignment="Center"
+                                    Focusable="False"
+                                    Margin="0,0,16,0"/>
+
+                    <!-- 时钟 -->
+                    <TextBlock Text="{Binding CurrentTime}"
+                               FontFamily="{StaticResource MonoFont}"
+                               FontSize="13"
+                               Foreground="{StaticResource Txt1Brush}"
+                               VerticalAlignment="Center"
+                               Margin="0,0,16,0"/>
+
+                    <!-- 窗口控制按钮（macOS 风格） -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Ellipse Width="12" Height="12" Cursor="Hand" Margin="0,0,6,0" ToolTip="最小化">
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Setter Property="Fill" Value="#FFFFBD44"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Fill">
+                                                <Setter.Value>
+                                                    <DrawingBrush>
+                                                        <DrawingBrush.Drawing>
+                                                            <DrawingGroup>
+                                                                <GeometryDrawing Brush="#FFFFBD44" Geometry="M0,0 A6,6 0 1 0 12,0 A6,6 0 1 0 0,0"/>
+                                                                <GeometryDrawing Brush="#99000000"
+                                                Geometry="M3,6 L9,6"/>
+                                                            </DrawingGroup>
+                                                        </DrawingBrush.Drawing>
+                                                    </DrawingBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                            <Ellipse.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding MinimizeCommand}"/>
+                            </Ellipse.InputBindings>
+                        </Ellipse>
+
+                        <!-- 最大化 -->
+                        <Ellipse Width="12" Height="12" Cursor="Hand" Margin="0,0,6,0" ToolTip="最大化 / 还原">
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Setter Property="Fill" Value="#FF00CA56"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Fill">
+                                                <Setter.Value>
+                                                    <DrawingBrush>
+                                                        <DrawingBrush.Drawing>
+                                                            <DrawingGroup>
+                                                                <GeometryDrawing Brush="#FF00CA56" Geometry="M0,0 A6,6 0 1 0 12,0 A6,6 0 1 0 0,0"/>
+                                                                <GeometryDrawing Brush="#99000000"
+                                                Geometry="M3.5,3.5 L8.5,3.5 L8.5,8.5 L3.5,8.5 Z"/>
+                                                            </DrawingGroup>
+                                                        </DrawingBrush.Drawing>
+                                                    </DrawingBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                            <Ellipse.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding MaximizeCommand}"/>
+                            </Ellipse.InputBindings>
+                        </Ellipse>
+
+                        <!-- 关闭 -->
+                        <Ellipse Width="12" Height="12" Cursor="Hand" ToolTip="关闭">
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Setter Property="Fill" Value="#FFFF6057"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Fill">
+                                                <Setter.Value>
+                                                    <DrawingBrush>
+                                                        <DrawingBrush.Drawing>
+                                                            <DrawingGroup>
+                                                                <GeometryDrawing Brush="#FFFF6057" Geometry="M0,0 A6,6 0 1 0 12,0 A6,6 0 1 0 0,0"/>
+                                                                <GeometryDrawing Brush="#99000000"
+                                                Geometry="M3.5,3.5 L8.5,8.5 M8.5,3.5 L3.5,8.5"/>
+                                                            </DrawingGroup>
+                                                        </DrawingBrush.Drawing>
+                                                    </DrawingBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                            <Ellipse.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding CloseCommand}"/>
+                            </Ellipse.InputBindings>
+                        </Ellipse>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ╔══════════════════════════════════════════╗
+             ║  ROW 1 · MAIN  (4列)                     ║
+             ║  IconNav | LeftPanel | Center | Right     ║
+             ╚══════════════════════════════════════════╝ -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="56"/>
+                <!-- Icon Nav -->
+                <ColumnDefinition Width="260"/>
+                <!-- Left Panel -->
+                <ColumnDefinition Width="*"/>
+                <!-- Unity 3D  -->
+                <ColumnDefinition Width="300"/>
+                <!-- Right Panel -->
+            </Grid.ColumnDefinitions>
+
+            <!-- ── Col 0 · 图标导航条 ── -->
+            <Border Grid.Column="0"
+                    Background="{StaticResource Bg1Brush}"
+                    BorderBrush="{StaticResource LineBrush}"
+                    BorderThickness="0,0,1,0">
+                <ContentControl prism:RegionManager.RegionName="IconNavRegion"
+                                Focusable="False"/>
+            </Border>
+
+            <!-- ── Col 1 · 左面板 ── -->
+            <Border Grid.Column="1"
+                    Background="{StaticResource Bg1Brush}"
+                    BorderBrush="{StaticResource LineBrush}"
+                    BorderThickness="0,0,1,0">
+                <ContentControl prism:RegionManager.RegionName="LeftPanelRegion"
+                                Focusable="False"/>
+            </Border>
+
+            <!-- ── Col 2 · Unity 3D 区域 ── -->
+            <Grid Grid.Column="2" Background="{StaticResource Bg0Brush}"
+                  x:Name="UnityGrid">
+
+                <!-- HwndHost：占满整个格子 -->
+
+                <!--<local:UnityHwndHost x:Name="UnityHost" UnityExePath="{Binding UnityExePath}"/>-->
+
+                <!-- 各页面导航区域，Dashboard时隐藏，其他页面覆盖Unity -->
+                <!-- 非Dashboard页面内容，覆盖Unity -->
+                <ContentControl prism:RegionManager.RegionName="MainContentRegion"
+                    Background="{StaticResource Bg0Brush}"
+                    Panel.ZIndex="5"
+                    Focusable="False"
+                    Visibility="{Binding IsNonDashboardPage,
+                                    Converter={StaticResource BoolVis}}"/>
+
+                <!-- Unity 3D 浮层控件组，非Dashboard时整体隐藏 -->
+                <Grid Panel.ZIndex="10"
+                            Visibility="{Binding IsDashboardPage,
+                                Converter={StaticResource BoolVis}}">
+
+                    <!-- ViewToolbar 右上角 -->
+                    <ContentControl prism:RegionManager.RegionName="ViewToolbarRegion"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0,12,12,0"
+                        Focusable="False"/>
+
+                    <!-- 视角模式标签 左上角 -->
+                    <ContentControl prism:RegionManager.RegionName="ViewModeLabelRegion"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Margin="12,12,0,0"
+                        Focusable="False"/>
+
+                    <!-- 任务进度条 左下角 -->
+                    <ContentControl prism:RegionManager.RegionName="TaskOverlayRegion"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="12,0,0,12"
+                        Focusable="False"/>
+                </Grid>
+
+                <!--
+                ╔════════════════════════════════════════════╗
+                ║  NOTE：浮动详情卡（DeviceDetailCard /       ║
+                ║  CellDetailCard）不在此处，它们渲染在       ║
+                ║  UnityOverlayWindow（独立透明 Window）内    ║
+                ║  → UnityOverlayWindow 在 ShellWindow       ║
+                ║    Loaded 事件中创建并 SyncBounds()          ║
+                ╚════════════════════════════════════════════╝
+                -->
+            </Grid>
+
+            <!-- ── Col 3 · 右面板 ── -->
+            <Border Grid.Column="3"
+                    Background="{StaticResource Bg1Brush}"
+                    BorderBrush="{StaticResource LineBrush}"
+                    BorderThickness="1,0,0,0">
+                <ContentControl prism:RegionManager.RegionName="RightPanelRegion"
+                                Focusable="False"/>
+            </Border>
+        </Grid>
+
+        <!-- ╔══════════════════════════════════════════╗
+             ║  ROW 2 · STATUS BAR                      ║
+             ╚══════════════════════════════════════════╝ -->
+        <Border Grid.Row="2"
+                Background="{StaticResource Bg1Brush}"
+                BorderBrush="{StaticResource LineBrush}"
+                BorderThickness="0,1,0,0" Grid.ColumnSpan="4">
+            <ContentControl prism:RegionManager.RegionName="StatusBarRegion"
+                            Focusable="False"/>
+        </Border>
+    </Grid>
+</Window>

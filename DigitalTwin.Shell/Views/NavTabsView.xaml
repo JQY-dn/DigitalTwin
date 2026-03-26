@@ -1,0 +1,70 @@
+﻿<!-- NavTabsView.xaml
+     路径：DigitalTwin.Shell/Views/NavTabsView.xaml
+     注册到 NavTabsRegion -->
+<UserControl x:Class="DigitalTwin.Shell.Views.NavTabsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:vm="clr-namespace:DigitalTwin.Shell.ViewModels"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="Transparent">
+
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+
+        <RadioButton Style="{StaticResource NavTab}"
+                     GroupName="NavGroup"
+                     IsChecked="True"
+                     Command="{Binding NavigateCommand}"
+                     CommandParameter="Dashboard">
+            <TextBlock FontFamily="{StaticResource DisplayFont}"
+                       FontSize="13" Text="⬡  总览"/>
+        </RadioButton>
+
+        <RadioButton Style="{StaticResource NavTab}"
+                     GroupName="NavGroup"
+                     
+                     Command="{Binding NavigateCommand}"
+                     CommandParameter="Inventory">
+            <TextBlock FontFamily="{StaticResource DisplayFont}"
+                       FontSize="13" Text="库存管理"/>
+        </RadioButton>
+
+        <RadioButton Style="{StaticResource NavTab}"
+                     GroupName="NavGroup"
+                     
+                     Command="{Binding NavigateCommand}"
+                     CommandParameter="Task">
+            <TextBlock FontFamily="{StaticResource DisplayFont}"
+                       FontSize="13" Text="任务调度"/>
+        </RadioButton>
+
+        <RadioButton Style="{StaticResource NavTab}"
+                     GroupName="NavGroup"
+                     
+                     Command="{Binding NavigateCommand}"
+                     CommandParameter="Report">
+            <TextBlock FontFamily="{StaticResource DisplayFont}"
+                       FontSize="13" Text="报表统计"/>
+        </RadioButton>
+
+        <RadioButton Style="{StaticResource NavTab}"
+                     GroupName="NavGroup"
+                     Command="{Binding NavigateCommand}"
+                     CommandParameter="Config">
+            <TextBlock FontFamily="{StaticResource DisplayFont}"
+                       FontSize="13" Text="系统配置"/>
+        </RadioButton>
+
+        <RadioButton Style="{StaticResource NavTab}"
+                     GroupName="NavGroup"
+                     Command="{Binding NavigateCommand}"
+                     CommandParameter="Alarm">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock FontFamily="{StaticResource DisplayFont}"
+                           FontSize="13" Text="报警日志"/>
+                
+            </StackPanel>
+        </RadioButton>
+
+    </StackPanel>
+</UserControl>

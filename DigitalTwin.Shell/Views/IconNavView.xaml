@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="DigitalTwin.Shell.Views.IconNavView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="Transparent">
+
+    <DockPanel>
+        <!-- 底部固定：设置 -->
+        <StackPanel DockPanel.Dock="Bottom"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,10">
+            <RadioButton Style="{StaticResource IconNavBtn}"
+                         ToolTip="系统配置"
+                         GroupName="IconGrp"
+                         Command="{Binding NavigateCommand}"
+                         CommandParameter="Config">
+                <TextBlock Text="⚙" FontSize="16"/>
+            </RadioButton>
+        </StackPanel>
+
+        <!-- 顶部：主功能图标 -->
+        <StackPanel HorizontalAlignment="Center"
+                    Margin="0,10,0,0">
+
+            <RadioButton Style="{StaticResource IconNavBtn}"
+                         ToolTip="总览"
+                         GroupName="IconGrp"
+                         IsChecked="True"
+                         Command="{Binding NavigateCommand}"
+                         CommandParameter="Dashboard">
+                <TextBlock Text="⬡" FontSize="16"/>
+            </RadioButton>
+
+            <RadioButton Style="{StaticResource IconNavBtn}"
+                         ToolTip="设备监控"
+                         GroupName="IconGrp"
+                         Command="{Binding NavigateCommand}"
+                         CommandParameter="DeviceMonitor">
+                <TextBlock Text="⇅" FontSize="16"/>
+            </RadioButton>
+
+            <RadioButton Style="{StaticResource IconNavBtn}"
+                         ToolTip="库存管理"
+                         GroupName="IconGrp"
+                         Command="{Binding NavigateCommand}"
+                         CommandParameter="Inventory">
+                <TextBlock Text="▦" FontSize="15"/>
+            </RadioButton>
+
+            <RadioButton Style="{StaticResource IconNavBtn}"
+                         ToolTip="任务调度"
+                         GroupName="IconGrp"
+                         Command="{Binding NavigateCommand}"
+                         CommandParameter="Task">
+                <TextBlock Text="⟳" FontSize="16"/>
+            </RadioButton>
+
+            <!-- 分隔线 -->
+            <Rectangle Width="28" Height="1"
+                       Fill="{StaticResource LineBrush}"
+                       Margin="0,8"/>
+
+            <!-- 报警（带角标） -->
+            <Grid>
+                <RadioButton Style="{StaticResource IconNavBtn}"
+                             ToolTip="报警日志"
+                             GroupName="IconGrp"
+                             Command="{Binding NavigateCommand}"
+                             CommandParameter="Alarm">
+                    <TextBlock Text="🔔" FontSize="15"/>
+                </RadioButton>
+                <Ellipse Width="8" Height="8"
+                         Fill="{StaticResource RedBrush}"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Top"
+                         Margin="0,5,5,0"
+                         >
+                    <Ellipse.Effect>
+                        <DropShadowEffect Color="#FFFF3D5A" BlurRadius="4"
+                                          ShadowDepth="0" Opacity="0.8"/>
+                    </Ellipse.Effect>
+                </Ellipse>
+            </Grid>
+
+            <RadioButton Style="{StaticResource IconNavBtn}"
+                         ToolTip="操作日志"
+                         GroupName="IconGrp"
+                         Command="{Binding NavigateCommand}"
+                         CommandParameter="Log">
+                <TextBlock Text="☰" FontSize="15"/>
+            </RadioButton>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

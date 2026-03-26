@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DigitalTwin.Infrastructure/DigitalTwin.Infrastructure.csproj" Id="91b3259d-bd12-47f8-bb40-a5c96e979b29" />
+  <Project Path="DigitalTwin.Shell/DigitalTwin.Shell.csproj" Id="52c0dea1-75b5-4b29-9c45-4295af0bca1e" />
+</Solution>

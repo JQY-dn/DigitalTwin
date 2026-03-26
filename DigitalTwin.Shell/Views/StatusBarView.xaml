@@ -1,0 +1,81 @@
+﻿<!-- ══════════════════════════════════════════════════════
+     StatusBarView.xaml
+     路径：DigitalTwin.Shell/Views/StatusBarView.xaml
+     注册到 StatusBarRegion（底部 26px）
+══════════════════════════════════════════════════════ -->
+<UserControl x:Class="DigitalTwin.Shell.Views.StatusBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="Transparent">
+
+    <StackPanel Orientation="Horizontal"
+                VerticalAlignment="Center"
+                Margin="16,0">
+
+        <!-- 设备状态 -->
+        <ItemsControl ItemsSource="{Binding DeviceStatusItems}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,20,0">
+                        <Ellipse Width="5" Height="5"
+                                 Fill="{Binding StatusBrush}"
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,5,0"/>
+                        <TextBlock FontFamily="{StaticResource MonoFont}"
+                                   FontSize="10"
+                                   Foreground="{StaticResource Txt2Brush}"
+                                   VerticalAlignment="Center">
+                            <Run Text="{Binding DeviceName}"/><Run Text=" "/><Run Foreground="{Binding StatusBrush}" Text="{Binding StatusLabel}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Rectangle Width="1" Height="14" Fill="{StaticResource LineBrush}" Margin="0,0,20,0"/>
+
+        <TextBlock FontFamily="{StaticResource MonoFont}" FontSize="10"
+                   Foreground="{StaticResource Txt2Brush}" VerticalAlignment="Center"
+                   Margin="0,0,20,0">
+            <Run Text="轮询周期 "/>
+            <Run Foreground="{StaticResource Txt1Brush}" Text="{Binding PollIntervalText}"/>
+        </TextBlock>
+
+        <Rectangle Width="1" Height="14" Fill="{StaticResource LineBrush}" Margin="0,0,20,0"/>
+
+        <TextBlock FontFamily="{StaticResource MonoFont}" FontSize="10"
+                   Foreground="{StaticResource Txt2Brush}" VerticalAlignment="Center"
+                   Margin="0,0,20,0">
+            <Run Text="Modbus延迟 "/>
+            <Run Foreground="{StaticResource Txt1Brush}" Text="{Binding ModbusLatencyText}"/>
+        </TextBlock>
+
+        <Rectangle Width="1" Height="14" Fill="{StaticResource LineBrush}" Margin="0,0,20,0"/>
+
+        <TextBlock FontFamily="{StaticResource MonoFont}" FontSize="10"
+                   Foreground="{StaticResource Txt2Brush}" VerticalAlignment="Center">
+            <Run Text="Unity同步 "/>
+            <Run Foreground="{StaticResource Txt1Brush}" Text="{Binding UnityLatencyText}"/>
+        </TextBlock>
+
+        <!-- 右对齐：日期 + 版本号 -->
+        <TextBlock FontFamily="{StaticResource MonoFont}" FontSize="10"
+                   Foreground="{StaticResource Txt1Brush}" VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Margin="40,0,0,0"
+                   Text="{Binding DateText}"/>
+
+        <Rectangle Width="1" Height="14" Fill="{StaticResource LineBrush}" Margin="16,0"/>
+
+        <TextBlock FontFamily="{StaticResource MonoFont}" FontSize="10"
+                   Foreground="{StaticResource Txt2Brush}" VerticalAlignment="Center"
+                   Text="v2.4.1 · AS/RS Digital Twin"/>
+    </StackPanel>
+</UserControl>

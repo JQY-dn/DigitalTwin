@@ -1,0 +1,52 @@
+﻿<!-- ══════════════════════════════════════════════════════
+     ViewToolbarView.xaml
+     路径：DigitalTwin.Shell/Views/ViewToolbarView.xaml
+     注册到 ViewToolbarRegion（3D区域右上角，Panel.ZIndex=10）
+══════════════════════════════════════════════════════ -->
+<UserControl x:Class="DigitalTwin.Shell.Views.ViewToolbarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="Transparent">
+
+    <StackPanel Orientation="Vertical">
+        <ToggleButton Style="{StaticResource ViewToolBtn}" ToolTip="透视视角"
+                      IsChecked="{Binding IsPerspective}">
+            <TextBlock Text="⬡" FontSize="14"/>
+        </ToggleButton>
+        <ToggleButton Style="{StaticResource ViewToolBtn}" ToolTip="俯视图" Margin="0,4,0,0"
+                      IsChecked="{Binding IsTopView}">
+            <TextBlock Text="⊞" FontSize="14"/>
+        </ToggleButton>
+        <ToggleButton Style="{StaticResource ViewToolBtn}" ToolTip="侧视图" Margin="0,4,0,0"
+                      IsChecked="{Binding IsSideView}">
+            <TextBlock Text="⊟" FontSize="14"/>
+        </ToggleButton>
+        <ToggleButton Style="{StaticResource ViewToolBtn}" ToolTip="跟随堆垛机" Margin="0,4,0,0"
+                      IsChecked="{Binding IsFollowMode}">
+            <TextBlock Text="⊕" FontSize="14"/>
+        </ToggleButton>
+
+        <!-- 分隔 -->
+        <Rectangle Height="8"/>
+
+        <Button Style="{StaticResource ViewToolBtnFlat}"
+        ToolTip="放大" Margin="0,0,0,4"
+        Command="{Binding ZoomInCommand}">
+            <TextBlock Text="+" FontSize="16" FontWeight="Bold"/>
+        </Button>
+
+        <Button Style="{StaticResource ViewToolBtnFlat}"
+        ToolTip="缩小" Margin="0,0,0,4"
+        Command="{Binding ZoomOutCommand}">
+            <TextBlock Text="−" FontSize="16"/>
+        </Button>
+
+        <Button Style="{StaticResource ViewToolBtnFlat}"
+        ToolTip="重置视角"
+        Command="{Binding ResetViewCommand}">
+            <TextBlock Text="⌖" FontSize="14"/>
+        </Button>
+    </StackPanel>
+</UserControl>

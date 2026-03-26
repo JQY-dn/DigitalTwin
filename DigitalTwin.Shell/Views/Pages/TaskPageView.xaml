@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="DigitalTwin.Shell.Views.Pages.TaskPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource Bg0Brush}">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="⟳" FontSize="48"
+                   Foreground="{StaticResource AmberBrush}"
+                   HorizontalAlignment="Center" Margin="0,0,0,16"/>
+        <TextBlock Text="任务调度"
+                   FontFamily="{StaticResource DisplayFont}"
+                   FontSize="36" FontWeight="Bold"
+                   Foreground="{StaticResource Txt0Brush}"
+                   HorizontalAlignment="Center"/>
+        <TextBlock Text="页面开发中..."
+                   FontSize="13" Margin="0,10,0,0"
+                   Foreground="{StaticResource Txt2Brush}"
+                   HorizontalAlignment="Center"/>
+    </StackPanel>
+</UserControl>
