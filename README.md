@@ -1,4 +1,4 @@
-# 🏭 AS/RS Digital Twin · 智能立体库数字孪生平台
+# 🏭 AS/RS Digital Twin · 智能立体库数字孪生平台（后端功能待添加）
 
 > 基于 WPF + Prism + EF Core + Modbus TCP 的工业级自动化立体仓库数字孪生监控系统
 
